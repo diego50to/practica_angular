@@ -1,1 +1,79 @@
-<p>client-edit works!</p>
+<div class="container">
+    <mat-card>
+        <h2>Editar Usuario</h2>
+
+        <form [formGroup]="formEditClient" (ngSubmit)="!formEditClient.invalid && submitEditClient()" class="form">
+
+            <mat-form-field class="form-element">
+                <mat-label>Nombre</mat-label>
+                <input matInput placeholder="Ingresar Nombre" formControlName="firstName">
+                <mat-error *ngIf="formEditClient.controls['firstName'].invalid && formEditClient.controls['firstName'].touched">
+                    <span *ngIf="formEditClient.get('firstName')?.hasError('required')">Campo requerido</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-element">
+                <mat-label>Apellido</mat-label>
+                <input matInput placeholder="Ingresar Apellido" formControlName="lastName">
+                <mat-error *ngIf="formEditClient.controls['lastName'].invalid && formEditClient.controls['lastName'].touched">
+                    <span *ngIf="formEditClient.get('lastName')?.hasError('required')">Campo requerido</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-element">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput placeholder="Ej. nombre@ejemplo.com" formControlName="email">
+                <mat-error *ngIf="formEditClient.controls['email'].invalid && formEditClient.controls['email'].touched">
+                    <span *ngIf="formEditClient.get('email')?.hasError('required')">Campo requerido</span>
+                    <span *ngIf="formEditClient.get('email')?.hasError('email')">debe tener formato email nombre@ejemplo.com</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-element">
+                <mat-label>DNI</mat-label>
+                <input matInput  type="number" placeholder="Ingrese DNI sin puntos" formControlName="dni">
+                <mat-error *ngIf="formEditClient.controls['dni'].invalid && formEditClient.controls['dni'].touched">
+                    <span *ngIf="formEditClient.get('dni')?.hasError('required')">Campo requerido</span>
+                    <span *ngIf="formEditClient.get('dni')?.hasError('min')">Su DNI no puede tener menos de 7 números</span>
+                    <span *ngIf="formEditClient.get('dni')?.hasError('max')">Su DNI no puede tener más de 8 números</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-element">
+                <mat-label>Fecha de Nacimiento</mat-label>
+                <input matInput placeholder="Seleccione Fecha de Nacimiento" formControlName="birthDate" [matDatepicker]="releasedAtPicker" (click)="releasedAtPicker.open()">
+                <mat-datepicker-toggle matSuffix [for]="releasedAtPicker" [disabled]="false">
+                <mat-icon matDatepickerToggleIcon>calendar_month</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #releasedAtPicker [disabled]="false" startView="year">
+                </mat-datepicker>
+                <mat-error *ngIf="formEditClient.controls['birthDate'].invalid && formEditClient.controls['birthDate'].touched">
+                    <span *ngIf="formEditClient.get('birthDate')?.hasError('required')">Campo requerido</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-element">
+                <mat-label>Teléfono</mat-label>
+                <input matInput type="number" placeholder="Ingrese teléfono. Cod. de área sin el 0 y el número sin el 15" formControlName="phone">
+                <mat-error *ngIf="formEditClient.controls['phone'].invalid && formEditClient.controls['phone'].touched">
+                    <span *ngIf="formEditClient.get('phone')?.hasError('required')">Campo requerido</span>
+                </mat-error>
+            </mat-form-field>
+            
+
+            <mat-form-field class="form-element">
+                <mat-label>Dirección</mat-label>
+                <input matInput placeholder="Ingrese Dirección" formControlName="homeAddress">
+                <mat-error
+                    *ngIf="formEditClient.controls['homeAddress'].invalid && formEditClient.controls['homeAddress'].touched">
+                    <span *ngIf="formEditClient.get('homeAddress')?.hasError('required')">Campo requerido</span>
+                </mat-error>
+            </mat-form-field>
+
+
+            <br>
+            <button mat-raised-button color="primary" [disabled]="!formEditClient.valid"
+                (click)="openSnackBar('Registro Actualizado Satisfactoriamente!', 'Cerrar' )">Actualizar</button>
+        </form>
+    </mat-card>
+</div>

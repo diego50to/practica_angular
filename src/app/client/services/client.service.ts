@@ -41,4 +41,11 @@ export class ClientService {
     this.clients.splice(index, 1);
   }
 
+  getClientById(id: number) : Observable<Client> {
+    return of(this.clients[id]);
+  }
+
+  editClient(clientEdited: Client, id:number) {
+    this.clients[id] = clientEdited;
+  }
 }

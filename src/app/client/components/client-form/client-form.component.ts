@@ -25,7 +25,7 @@ export class ClientFormComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      dni: ['', [Validators.required, Validators.min(1000000), Validators.max(9999999),]],
+      dni: ['', [Validators.required, Validators.min(1000000), Validators.max(99999999),]],
       birthDate: ['', [Validators.required]],
       phone: ['', [Validators.required]],
       homeAddress: ['', [Validators.required]],

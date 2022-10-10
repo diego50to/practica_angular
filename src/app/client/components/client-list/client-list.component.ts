@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Client } from 'src/app/core/entities/client.entity';
 import { ClientService } from '../../services/client.service';
 
@@ -24,7 +25,7 @@ export class ClientListComponent implements OnInit {
     'action',
   ];
 
-  constructor(private clientService: ClientService) {}
+  constructor(private clientService: ClientService, private router: Router) {}
 
   ngOnInit(): void {
     this.getClients();
@@ -43,5 +44,10 @@ export class ClientListComponent implements OnInit {
     }
   
 
-  editClient(clients: any) {}
+  currentIndexClient(index: number) {
+  window.localStorage.removeItem("editClientId");
+  window.localStorage.setItem("editClientId", index.toString());
+  this.router.navigate(['/clients/edit-client']);
+  }
+
 }
